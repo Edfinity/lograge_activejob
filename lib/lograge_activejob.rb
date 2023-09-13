@@ -5,6 +5,7 @@ module LogrageActivejob
   module_function
 
   mattr_writer :custom_options
+  mattr_accessor :ignore_jobs
   self.custom_options = nil
 
   mattr_accessor :logger
@@ -20,6 +21,7 @@ module LogrageActivejob
   def setup(app)
     LogrageActivejob.logger = app.config.lograge_activejob.logger
     LogrageActivejob.custom_options = app.config.lograge_activejob.custom_options
+    LogrageActivejob.ignore_jobs = app.config.lograge_activejob.ignore_jobs
     LogrageActivejob::LogSubscriber.attach_to :active_job
   end
 end

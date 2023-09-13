@@ -49,6 +49,16 @@ Rails.application.configure do
 end
 ```
 
+### Ignore jobs
+You can mark specific jobs to not be logged.
+
+```ruby
+Rails.application.configure do
+  config.lograge_activejob.ignore_jobs = ENV.fetch('DISABLE_JOB_LOGS', '').split
+end
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

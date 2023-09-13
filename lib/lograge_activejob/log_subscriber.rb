@@ -4,9 +4,11 @@ module LogrageActivejob
   class LogSubscriber < ActiveSupport::LogSubscriber
     def perform(event)
       data = initial_data(event)
-      data.merge!(custom_options(event))
-      formatted_message = Lograge.formatter.call(data)
-      logger.send(Lograge.log_level, formatted_message)
+      unless LogrageActivejob.ignore_jobs&.include?(data[:job_class])
+        data.merge!(custom_options(event))
+        formatted_message = Lograge.formatter.call(data)
+        logger.send(Lograge.log_level, formatted_message)
+      end
     end
 
     private

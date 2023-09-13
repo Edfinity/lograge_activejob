@@ -1,7 +1,7 @@
 require 'rails/railtie'
 
 module LogrageActivejob
-  Config = Struct.new(:custom_options, :logger)
+  Config = Struct.new(:custom_options, :ignore_jobs, :logger)
 
   class Railtie < Rails::Railtie
     config.lograge_activejob = Config.new
